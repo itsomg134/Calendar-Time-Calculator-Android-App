@@ -84,37 +84,6 @@ app/
 └── build.gradle                          # Project-level build configuration
 ```
 
-## 🔧 Build Configuration
-
-The app uses the following build configuration:
-
-```gradle
-android {
-    namespace 'com.example.calendartimecalculator'
-    compileSdk 34
-
-    defaultConfig {
-        applicationId "com.example.calendartimecalculator"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-    }
-}
-```
-
-## 📱 App Screenshots
-
-### Main Screen
-- **Calculate Difference Section**: Input "From" and "To" dates/times with native pickers
-- **Add/Subtract Time Section**: Select operation, enter date/time, and specify amounts
-- **Results Display**: Clearly formatted results with visual indicators
-
-### Features in Action
-- Date and time pickers open native Android dialogs
-- Results show detailed breakdown (days, hours, minutes, seconds)
-- Operation dialog allows entering days, hours, and minutes to add/subtract
-
 ## 💡 Usage Examples
 
 ### Calculate Time Difference
