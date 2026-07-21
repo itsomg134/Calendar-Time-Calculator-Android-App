@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Calendar Time Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #0b0f1a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      margin: 0;
+      color: #e8edf5;
+    }
+
+    /* Android‑style card */
+    .app-card {
+      max-width: 420px;
+      width: 100%;
+      background: #141b2b;
+      background: linear-gradient(145deg, #1a2335 0%, #0f1625 100%);
+      border-radius: 40px;
+      padding: 28px 22px 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(2px);
+      transition: all 0.2s;
+    }
+
+    h1 {
+      font-weight: 500;
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+      padding-bottom: 6px;
+      background: linear-gradient(135deg, #b7d0ff, #7aa9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #2a3650;
+      padding-bottom: 18px;
+    }
+
+    h1 small {
+      font-size: 1rem;
+      font-weight: 400;
+      background: #2a3650;
+      color: #b0c8ff;
+      padding: 2px 12px;
+      border-radius: 30px;
+      letter-spacing: 0.3px;
+      margin-left: auto;
+      background: #1f2b42;
+    }
+
+    .section {
+      background: #101826;
+      border-radius: 28px;
+      padding: 18px 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 6px 12px rgba(0, 0, 0, 0.3);
+      border: 1px solid #29344b;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #7e93c0;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title i {
+      font-style: normal;
+      font-size: 1.2rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .row label {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #b2c7f0;
+      min-width: 60px;
+      opacity: 0.9;
+    }
+
+    input[type="date"],
+    input[type="number"] {
+      background: #0b111e;
+      border: 1px solid #2f3d5c;
+      border-radius: 40px;
+      padding: 12px 16px;
+      font-size: 1rem;
+      color: #eef4ff;
+      font-weight: 400;
+      flex: 1;
+      min-width: 140px;
+      outline: none;
+      transition: 0.2s;
+      box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.8) sepia(1) hue-rotate(190deg) brightness(1.2);
+      cursor: pointer;
+    }
+
+    input:focus {
+      border-color: #6a8eff;
+      box-shadow: 0 0 0 3px rgba(90, 140, 255, 0.3), inset 0 2px 4px #000;
+    }
+
+    .inline-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #a0b6e0;
+      font-weight: 300;
+      background: #1b253c;
+      padding: 4px 12px 4px 6px;
+      border-radius: 40px;
+      border: 1px solid #31405e;
+    }
+
+    .inline-label span {
+      font-size: 1.1rem;
+      padding: 0 4px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .btn {
+      background: #1f2c47;
+      border: none;
+      border-radius: 60px;
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #d6e2ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1 1 auto;
+      min-width: 100px;
+      box-shadow: 0 4px 0 #0b111e, 0 6px 12px rgba(0, 0, 0, 0.4);
+      transition: all 0.06s linear;
+      border: 1px solid #35466b;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #0b111e;
+    }
+
+    .btn-primary {
+      background: #3f5fbc;
+      border-color: #5f7edb;
+      color: white;
+      box-shadow: 0 4px 0 #1b2a5a, 0 6px 14px rgba(50, 100, 255, 0.2);
+    }
+
+    .btn-primary:active {
+      background: #2f4ba0;
+    }
+
+    .btn-secondary {
+      background: #293858;
+      border-color: #40547a;
+    }
+
+    .result-box {
+      background: #0f182a;
+      border-radius: 30px;
+      padding: 20px 18px;
+      margin: 10px 0 6px;
+      border-left: 5px solid #4a72da;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    .result-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 6px 0;
+      border-bottom: 1px dashed #25304a;
+    }
+
+    .result-line:last-child {
+      border-bottom: none;
+    }
+
+    .result-label {
+      color: #8199cc;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+
+    .result-value {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #cfdfff;
+      background: #1d2842;
+      padding: 4px 16px;
+      border-radius: 50px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.5px;
+    }
+
+    .result-value.diff {
+      color: #b3d0ff;
+    }
+
+    .divider {
+      height: 1px;
+      background: #293a57;
+      margin: 18px 0 12px;
+      opacity: 0.3;
+    }
+
+    .footer-note {
+      font-size: 0.7rem;
+      color: #5d73a0;
+      text-align: center;
+      margin-top: 22px;
+      letter-spacing: 0.6px;
+      border-top: 1px solid #1f2c44;
+      padding-top: 16px;
+    }
+
+    @media (max-width: 420px) {
+      .app-card { padding: 20px 16px; }
+      .row { flex-direction: column; align-items: stretch; }
+      .row label { min-width: auto; }
+      .btn { min-width: 80px; padding: 12px 14px; }
+      .result-value { font-size: 1.1rem; padding: 4px 12px; }
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      opacity: 0.5;
+      height: 30px;
+    }
+
+    .glow-text {
+      color: #b7ceff;
+    }
+  </style>
+</head>
+<body>
+<div class="app-card" role="main">
+  <h1>
+     Calendar Time
+    <small>v2</small>
+  </h1>
+
+  <div class="section">
+    <div class="section-title"><i></i> Date difference</div>
+    <div class="input-group">
+      <div class="row">
+        <label>From</label>
+        <input type="date" id="dateFrom" value="2026-07-21">
+      </div>
+      <div class="row">
+        <label>To</label>
+        <input type="date" id="dateTo" value="2026-12-25">
+      </div>
+      <button class="btn btn-primary" id="calcDiffBtn">Calculate difference</button>
+      <div class="result-box" id="diffResult">
+        <div class="result-line">
+          <span class="result-label">Days</span>
+          <span class="result-value diff" id="diffDays">—</span>
+        </div>
+        <div class="result-line">
+          <span class="result-label">Weeks</span>
+          <span class="result-value diff" id="diffWeeks">—</span>
+        </div>
+        <div class="result-line">
+          <span class="result-label">Months (approx)</span>
+          <span class="result-value diff" id="diffMonths">—</span>
+        </div>
+        <div class="result-line" style="border-bottom: none;">
+          <span class="result-label">Years (approx)</span>
+          <span class="result-value diff" id="diffYears">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><i></i> Add / subtract time</div>
+    <div class="input-group">
+      <div class="row">
+        <label>Start date</label>
+        <input type="date" id="baseDate" value="2026-07-21">
+      </div>
+      <div class="row" style="flex-wrap: wrap; gap: 8px;">
+        <label style="min-width: 40px;">Amount</label>
+        <input type="number" id="timeAmount" value="3" min="-9999" max="9999" style="flex: 0.7; min-width: 70px;">
+        <select id="timeUnit" style="flex: 1; background: #0b111e; border: 1px solid #2f3d5c; border-radius: 40px; padding: 12px 16px; color: #eef4ff; font-size: 1rem; outline: none; box-shadow: inset 0 4px 6px rgba(0,0,0,0.6);">
+          <option value="days">Days</option>
+          <option value="weeks">Weeks</option>
+          <option value="months">Months</option>
+          <option value="years">Years</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button class="btn btn-secondary" id="addTimeBtn">➕ Add</button>
+        <button class="btn btn-secondary" id="subTimeBtn">➖ Subtract</button>
+      </div>
+      <div class="result-box" id="addResult" style="border-left-color: #cb7aff;">
+        <div class="result-line">
+          <span class="result-label">Result date</span>
+          <span class="result-value" id="resultDate" style="background: #2c1f4a;">—</span>
+        </div>
+        <div class="result-line" style="border-bottom: none;">
+          <span class="result-label">Weekday</span>
+          <span class="result-value" id="resultWeekday" style="background: #2c1f4a; font-weight: 400;">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 8px;">
+    <button class="btn" style="flex: 0 1 auto; padding: 8px 18px; background: #1f2c47;" data-preset="today"> Today</button>
+    <button class="btn" style="flex: 0 1 auto; padding: 8px 18px; background: #1f2c47;" data-preset="week">+1 week</button>
+    <button class="btn" style="flex: 0 1 auto; padding: 8px 18px; background: #1f2c47;" data-preset="month">+1 month</button>
+    <button class="btn" style="flex: 0 1 auto; padding: 8px 18px; background: #1f2c47;" data-preset="year"> +1 year</button>
+  </div>
+
+  <div class="footer-note">Tap · Press &nbsp;|&nbsp; All calculations in local time</div>
+</div>
+
+<script>
+  (function() {
+    "use strict";
+
+    const dateFrom = document.getElementById('dateFrom');
+    const dateTo = document.getElementById('dateTo');
+    const calcDiffBtn = document.getElementById('calcDiffBtn');
+
+    const diffDays = document.getElementById('diffDays');
+    const diffWeeks = document.getElementById('diffWeeks');
+    const diffMonths = document.getElementById('diffMonths');
+    const diffYears = document.getElementById('diffYears');
+
+    const baseDate = document.getElementById('baseDate');
+    const timeAmount = document.getElementById('timeAmount');
+    const timeUnit = document.getElementById('timeUnit');
+    const addTimeBtn = document.getElementById('addTimeBtn');
+    const subTimeBtn = document.getElementById('subTimeBtn');
+    const resultDate = document.getElementById('resultDate');
+    const resultWeekday = document.getElementById('resultWeekday');
+
+    function parseDate(str) {
+      if (!str) return null;
+      const parts = str.split('-');
+      if (parts.length !== 3) return null;
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      const d = parseInt(parts[2], 10);
+      return new Date(y, m, d);
+    }
+
+    function formatDate(date) {
+      if (!date || isNaN(date.getTime())) return 'Invalid date';
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function formatDateNice(date) {
+      if (!date || isNaN(date.getTime())) return '—';
+      return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function getWeekday(date) {
+      if (!date || isNaN(date.getTime())) return '—';
+      return date.toLocaleDateString(undefined, { weekday: 'long' });
+    }
+
+    function calcDifference() {
+      const fromStr = dateFrom.value;
+      const toStr = dateTo.value;
+      if (!fromStr || !toStr) {
+        diffDays.textContent = '—';
+        diffWeeks.textContent = '—';
+        diffMonths.textContent = '—';
+        diffYears.textContent = '—';
+        return;
+      }
+      const d1 = parseDate(fromStr);
+      const d2 = parseDate(toStr);
+      if (!d1 || !d2 || isNaN(d1.getTime()) || isNaN(d2.getTime())) {
+        diffDays.textContent = '⚠️';
+        diffWeeks.textContent = '⚠️';
+        diffMonths.textContent = '⚠️';
+        diffYears.textContent = '⚠️';
+        return;
+      }
+
+      const from = new Date(Math.min(d1, d2));
+      const to = new Date(Math.max(d1, d2));
+
+      const diffTime = to.getTime() - from.getTime();
+      const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const weeks = Math.floor(days / 7);
+      const months = Math.round((days / 30.44) * 10) / 10;
+      const years = Math.round((days / 365.25) * 10) / 10;
+
+      diffDays.textContent = days;
+      diffWeeks.textContent = weeks;
+      diffMonths.textContent = months.toFixed(1);
+      diffYears.textContent = years.toFixed(1);
+    }
+
+    function computeAddSub(operation) {
+      const baseStr = baseDate.value;
+      if (!baseStr) {
+        resultDate.textContent = ' no date';
+        resultWeekday.textContent = '—';
+        return;
+      }
+      const base = parseDate(baseStr);
+      if (!base || isNaN(base.getTime())) {
+        resultDate.textContent = ' invalid';
+        resultWeekday.textContent = '—';
+        return;
+      }
+
+      let amount = parseFloat(timeAmount.value);
+      if (isNaN(amount) || amount === 0) {
+        resultDate.textContent = formatDateNice(base);
+        resultWeekday.textContent = getWeekday(base);
+        return;
+      }
+
+      const unit = timeUnit.value;
+      let newDate = new Date(base.getTime());
+
+      if (unit === 'days') {
+        const delta = operation === 'add' ? amount : -amount;
+        newDate.setDate(newDate.getDate() + delta);
+      } else if (unit === 'weeks') {
+        const delta = operation === 'add' ? amount * 7 : -amount * 7;
+        newDate.setDate(newDate.getDate() + delta);
+      } else if (unit === 'months') {
+        const delta = operation === 'add' ? amount : -amount;
+        newDate.setMonth(newDate.getMonth() + delta);
+      } else if (unit === 'years') {
+        const delta = operation === 'add' ? amount : -amount;
+        newDate.setFullYear(newDate.getFullYear() + delta);
+      } else {
+        resultDate.textContent = ' unit error';
+        resultWeekday.textContent = '—';
+        return;
+      }
+
+      if (isNaN(newDate.getTime())) {
+        resultDate.textContent = ' overflow';
+        resultWeekday.textContent = '—';
+        return;
+      }
+
+      resultDate.textContent = formatDateNice(newDate);
+      resultWeekday.textContent = getWeekday(newDate);
+    }
+
+    function applyPreset(preset) {
+      const today = new Date();
+      const todayStr = formatDate(today);
+      baseDate.value = todayStr;
+
+      if (preset === 'today') {
+        dateFrom.value = todayStr;
+        const future = new Date(today);
+        dateTo.value = todayStr; // same
+        baseDate.value = todayStr;
+        resultDate.textContent = formatDateNice(today);
+        resultWeekday.textContent = getWeekday(today);
+      } else {
+        let future = new Date(today);
+        if (preset === 'week') future.setDate(future.getDate() + 7);
+        else if (preset === 'month') future.setMonth(future.getMonth() + 1);
+        else if (preset === 'year') future.setFullYear(future.getFullYear() + 1);
+        dateFrom.value = todayStr;
+        dateTo.value = formatDate(future);
+        // also set baseDate to today and show result
+        baseDate.value = todayStr;
+        resultDate.textContent = formatDateNice(future);
+        resultWeekday.textContent = getWeekday(future);
+      }
+      // auto-update diff
+      calcDifference();
+      // also update add result? we set baseDate already, but we compute result with 0 amount? we set the future as result.
+      // but we want to reflect if amount is zero? we just set result to future.
+      // we already set resultDate & weekday above.
+    }
+
+    // ----- Event listeners -----
+    calcDiffBtn.addEventListener('click', calcDifference);
+
+    addTimeBtn.addEventListener('click', function() {
+      computeAddSub('add');
+    });
+
+    subTimeBtn.addEventListener('click', function() {
+      computeAddSub('sub');
+    });
+
+    // presets
+    document.querySelectorAll('[data-preset]').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const preset = this.getAttribute('data-preset');
+        applyPreset(preset);
+        // re-run add/sub display? baseDate updated, amount unchanged -> show base if amount=0? we set manually.
+        // we also set resultDate in applyPreset, but also if amount != 0 we might want to recompute.
+        // to keep consistent: recompute add/sub with current amount, but if amount is 0 it shows baseDate.
+        // but we already set resultDate nicely. we just call computeAddSub with 'add' (or 'sub') but we want to reflect actual.
+        // we can call computeAddSub with 'add' but it will use amount, so if amount !=0 it will change.
+        // better: if amount is 0, we show base; if amount !=0, we need to apply operation.
+        // so we recompute with 'add' using current amount.
+        // but be careful: we set baseDate = today, so computeAddSub('add') will add amount to today.
+        // but we set resultDate to future in preset. we could instead compute the future with add/sub.
+        // let's just sync: set baseDate, then compute with add using amount, but if amount is 0 we want to show base.
+        // so we force compute.
+        if (parseFloat(timeAmount.value) === 0) {
+          // show baseDate
+          const base = parseDate(baseDate.value);
+          if (base && !isNaN(base.getTime())) {
+            resultDate.textContent = formatDateNice(base);
+            resultWeekday.textContent = getWeekday(base);
+          }
+        } else {
+          computeAddSub('add'); // add with current amount
+        }
+        // also update diff if changed
+        calcDifference();
+      });
+    });
+
+    // initial load: set default dates if empty
+    function initDefaults() {
+      const today = new Date();
+      const todayStr = formatDate(today);
+      if (!dateFrom.value) dateFrom.value = todayStr;
+      if (!dateTo.value) {
+        const future = new Date(today);
+        future.setDate(future.getDate() + 30);
+        dateTo.value = formatDate(future);
+      }
+      if (!baseDate.value) baseDate.value = todayStr;
+      // fill result for add/sub
+      const base = parseDate(baseDate.value);
+      if (base && !isNaN(base.getTime())) {
+        resultDate.textContent = formatDateNice(base);
+        resultWeekday.textContent = getWeekday(base);
+      }
+      // calc diff
+      calcDifference();
+    }
+
+    initDefaults();
+
+    // whenever date changes, maybe we want to update diff? but only on button.
+    // additionally, when baseDate changes we can update result if amount is 0.
+    baseDate.addEventListener('change', function() {
+      const base = parseDate(baseDate.value);
+      if (base && !isNaN(base.getTime()) && parseFloat(timeAmount.value) === 0) {
+        resultDate.textContent = formatDateNice(base);
+        resultWeekday.textContent = getWeekday(base);
+      } else if (base && !isNaN(base.getTime())) {
+        // if amount not zero, we don't auto-update (user must press add/sub)
+        // but we can show base as preview? we keep current result
+        // optionally we can show base if amount is zero else we keep previous
+      }
+    });
+
+    // if amount changes to zero, update to show base date
+    timeAmount.addEventListener('input', function() {
+      const val = parseFloat(this.value);
+      if (val === 0) {
+        const base = parseDate(baseDate.value);
+        if (base && !isNaN(base.getTime())) {
+          resultDate.textContent = formatDateNice(base);
+          resultWeekday.textContent = getWeekday(base);
+        }
+      }
+    });
+
+    // fix for month overflow (setMonth edge) – but we handle with setMonth correctly.
+
+    console.log(' Calendar Time Calculator ready');
+  })();
+</script>
+</body>
+</html>
