@@ -2,6 +2,8 @@
 
 A comprehensive Android application for calculating time differences between dates and performing date/time arithmetic operations with an intuitive Material Design interface.
 
+<img width="523" height="737" alt="image" src="https://github.com/user-attachments/assets/cfa9e68f-3cd7-41d2-b0fe-26ff18f8222f" />
+
 ## Features
 
 ### Time Difference Calculator
