@@ -106,7 +106,7 @@ app/
 4. Enter the amount to subtract
 5. View the resulting date and time
 
-## 🎯 Key Features Explained
+## Key Features Explained
 
 ### Date/Time Validation
 The app validates all inputs to ensure:
@@ -114,23 +114,11 @@ The app validates all inputs to ensure:
 - Valid time format (HH:MM)
 - "To" date/time is after "From" date/time
 
-### Result Formatting
-Results are displayed with:
-- Clear labels for each time unit
-- Visual indicators (📅 🕐 ⏱️ ⏲️)
-- Total duration summary
-- Original input display for reference
-
-### Error Handling
-- User-friendly error messages
-- Toast notifications for invalid inputs
-- Graceful handling of parsing errors
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Android Open Source Project
 - Material Design Components team
