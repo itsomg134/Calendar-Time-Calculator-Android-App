@@ -84,7 +84,7 @@ app/
 └── build.gradle                          # Project-level build configuration
 ```
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### Calculate Time Difference
 1. Enter the "From" date and time
@@ -126,17 +126,7 @@ Results are displayed with:
 - Toast notifications for invalid inputs
 - Graceful handling of parsing errors
 
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -152,46 +142,3 @@ If you encounter any issues or have questions:
 - Open an issue on GitHub
 - Check the troubleshooting section below
 
-## 🔧 Troubleshooting
-
-### Common Issues
-
-**Issue**: App won't build
-- **Solution**: Ensure you have Java 17+ installed and Gradle synced
-
-**Issue**: Emulator won't start
-- **Solution**: Verify that virtualization is enabled in BIOS
-- Check that you have enough disk space for the AVD
-
-**Issue**: Date picker doesn't show
-- **Solution**: Ensure the app has necessary permissions
-- Check that the view IDs match the code
-
-### VS Code Specific
-- Install the Caspian Emulator extension for automatic SDK setup
-- Use `Ctrl+Shift+P` and search for "Android" commands
-- Ensure the Android SDK path is correctly set
-
-## 🚀 Future Improvements
-
-- [ ] Add support for time zones
-- [ ] Implement calendar view for date selection
-- [ ] Add export/import of calculations
-- [ ] Support for recurring event calculations
-- [ ] Add multiple time zone display
-- [ ] Implement workday calculations
-- [ ] Add widget support
-- [ ] Support for batch calculations
-
-## 📊 Version History
-
-- **1.0.0** (Current)
-  - Initial release
-  - Time difference calculator
-  - Add/Subtract time operations
-  - Material Design UI
-  - Date and time pickers
-
----
-
-**Made with ❤️ for all time calculation needs**
