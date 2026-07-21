@@ -2,7 +2,7 @@
 
 A comprehensive Android application for calculating time differences between dates and performing date/time arithmetic operations with an intuitive Material Design interface.
 
-## 📱 Features
+## Features
 
 ### 🔍 Time Difference Calculator
 - Calculate exact differences between two dates and times
