@@ -4,26 +4,26 @@ A comprehensive Android application for calculating time differences between dat
 
 ## Features
 
-### 🔍 Time Difference Calculator
+### Time Difference Calculator
 - Calculate exact differences between two dates and times
 - Display results in days, hours, minutes, and seconds
 - Visual formatting with emoji icons for better readability
 - Input validation to ensure correct date/time formats
 
-### ➕➖ Date/Time Arithmetic
+### Date/Time Arithmetic
 - Add or subtract days, hours, and minutes from any date/time
 - Select between "Add Time" and "Subtract Time" operations
 - Interactive dialog for entering amounts to add/subtract
 - Display original and resulting date/time side by side
 
-### 🎨 User Interface
+### User Interface
 - Clean Material Design implementation
 - Native Android date and time pickers
 - Responsive layout that works on all screen sizes
 - Clear visual separation between different features
 - Dark theme support ready
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Kotlin** - Primary programming language
 - **Android SDK** - Android application development framework
@@ -31,7 +31,7 @@ A comprehensive Android application for calculating time differences between dat
 - **View Binding** - Type-safe view access
 - **Calendar API** - Date/time manipulation and calculations
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -42,25 +42,13 @@ Before you begin, ensure you have the following installed:
 ### For VS Code Users
 We recommend installing the **Caspian Emulator** extension for easy setup without Android Studio.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Clone the Repository
 ```bash
 git clone https://github.com/yourusername/calendar-time-calculator.git
 cd calendar-time-calculator
 ```
-
-### Open in Android Studio
-1. Open Android Studio
-2. Select "Open an existing Android Studio project"
-3. Navigate to the project directory and select it
-4. Wait for Gradle sync to complete
-
-### Run the App
-1. Connect a physical device or start an emulator
-2. Click the "Run" button (▶) or press `Shift + F10`
-3. Select your target device
-4. Wait for the app to build and install
 
 ### VS Code Setup
 If using VS Code with the Caspian Emulator extension:
@@ -70,7 +58,7 @@ If using VS Code with the Caspian Emulator extension:
 4. Create a new AVD (Android Virtual Device)
 5. Use the command `Android: Run on Device/Emulator` to launch the app
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 app/
